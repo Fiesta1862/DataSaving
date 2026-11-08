@@ -286,6 +286,7 @@ private fun scheduleSmartExpiryReminder(context: Context, dateText: String) {
         set(Calendar.SECOND, 0)
         set(Calendar.MILLISECOND, 0)
     }
+    if (calendar.timeInMillis <= System.currentTimeMillis()) return
     val reminderAt = calendar.timeInMillis - TimeUnit.DAYS.toMillis(1)
     val delay = (reminderAt - System.currentTimeMillis()).coerceAtLeast(TimeUnit.MINUTES.toMillis(1))
     val request = OneTimeWorkRequestBuilder<SmartPromoExpiryWorker>()
