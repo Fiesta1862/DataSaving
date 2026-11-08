@@ -162,8 +162,24 @@ private fun DataSavingApp() {
 }
 
 @Composable
-private fun NavItem(label: String, icon: androidx.compose.ui.graphics.vector.ImageVector, selected: Boolean, click: () -> Unit) {
-    NavigationBarItem(selected = selected, onClick = click, icon = { Icon(icon, null) }, label = { Text(label, fontSize = 10.sp) })
+private fun RowScope.NavItem(label: String, icon: androidx.compose.ui.graphics.vector.ImageVector, selected: Boolean, click: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .weight(1f)
+            .clickable(onClick = click)
+            .padding(vertical = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(icon, contentDescription = label, tint = if (selected) Green else Muted)
+        Spacer(Modifier.height(4.dp))
+        Text(
+            label,
+            fontSize = 10.sp,
+            color = if (selected) Green else Muted,
+            fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal
+        )
+    }
 }
 
 @Composable
