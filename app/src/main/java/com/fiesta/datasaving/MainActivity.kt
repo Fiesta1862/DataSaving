@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private enum class Screen { HOME, BROWSER, DOWNLOADS, USAGE }
+private enum class Screen { HOME, BROWSER, DOWNLOADS, USAGE, SMART }
 
 @Composable
 private fun DataSavingApp() {
@@ -104,6 +104,7 @@ private fun DataSavingApp() {
                     NavItem("Browser", Icons.Default.Language, screen == Screen.BROWSER) { screen = Screen.BROWSER }
                     NavItem("Files", Icons.Default.Folder, screen == Screen.DOWNLOADS) { refresh++; screen = Screen.DOWNLOADS }
                     NavItem("Usage", Icons.Default.DataUsage, screen == Screen.USAGE) { screen = Screen.USAGE }
+                    NavItem("Smart", Icons.Default.SimCard, screen == Screen.SMART) { screen = Screen.SMART }
                 }
             }
         ) { padding ->
@@ -155,6 +156,7 @@ private fun DataSavingApp() {
                             }
                         })
                     Screen.USAGE -> UsageScreen(totalBytes, files.size, currentRx, currentTx)
+                    Screen.SMART -> SmartCarrierScreen()
                 }
             }
         }
